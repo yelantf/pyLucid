@@ -326,24 +326,16 @@ def rotate_image(image, angle,interp=cv2.INTER_LINEAR):
 
     # Find the size of the new image
     x_coords = [pt[0] for pt in rotated_coords]
-    #x_pos = [x for x in x_coords if x > 0]
-    #x_neg = [x for x in x_coords if x < 0]
 
     y_coords = [pt[1] for pt in rotated_coords]
-    #y_pos = [y for y in y_coords if y > 0]
-    #y_neg = [y for y in y_coords if y < 0]
 
-    # right_bound = max(x_pos)
-    # left_bound = min(x_neg)
-    # top_bound = max(y_pos)
-    # bot_bound = min(y_neg)
-    right_bound=max(x_coords)
     left_bound=min(x_coords)
-    top_bound=max(y_coords)
-    bot_bound=min(y_coords)
+    right_bound=max(x_coords)
+    top_bound=min(y_coords)
+    bot_bound=max(y_coords)
 
-    new_w = int(abs(right_bound - left_bound))
-    new_h = int(abs(top_bound - bot_bound))
+    new_w = int(right_bound - left_bound)
+    new_h = int(bot_bound - top_bound)
 
     # We require a translation matrix to keep the image centred
     trans_mat = np.matrix([
