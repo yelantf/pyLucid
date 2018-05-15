@@ -378,11 +378,6 @@ def crop_around_center(image, width, height):
     if(height > image_size[1]):
         height = image_size[1]
 
-    # x1 = int(image_center[0] - width * 0.5)
-    # x2 = int(image_center[0] + width * 0.5)
-    # y1 = int(image_center[1] - height * 0.5)
-    # y2 = int(image_center[1] + height * 0.5)
-
     x1=image_center[0]-width/2
     x2=x1+width
     y1=image_center[1]-height/2
