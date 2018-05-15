@@ -6,7 +6,6 @@ import pycuda.autoinit
 import pycuda.gpuarray as gpuarray
 from pycuda.compiler import SourceModule
 from PatchMatch.PatchMatchCuda import PatchMatch
-from time import time
 
 def paint(Iorg, Mask, verbose=True, sigma=0.1):
     Iorg=cv2.cvtColor(Iorg,cv2.COLOR_BGR2Lab)

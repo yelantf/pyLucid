@@ -1,7 +1,5 @@
 import cv2
 import numpy as np 
-import scipy.interpolate
-import matplotlib.pyplot as plt
 
 def dreamData(img, gt, bgimg, consequent_frames):
     if isinstance(bgimg,basestring):
