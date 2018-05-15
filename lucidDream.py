@@ -54,11 +54,9 @@ def dreamData(img, gt, bgimg, consequent_frames):
         object_ids=np.unique(gt_1)
         if object_ids[0]==0:
             object_ids=object_ids[1:]
-        print object_ids
         number_of_objects=np.random.randint(object_ids.size)+1
         mask_object_ids_fg=np.random.choice(object_ids,number_of_objects,replace=False)
         mask_object_ids_fg=np.sort(mask_object_ids_fg)
-        print mask_object_ids_fg
         mask_fg=gt_1.copy()
         mask_fg[np.isin(gt_1,mask_object_ids_fg,invert=True)]=0
         mask_bg=gt_1.copy()
