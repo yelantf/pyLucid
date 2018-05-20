@@ -42,6 +42,8 @@ def dreamData(img, gt, bgimg, consequent_frames):
 
     if np.random.randint(2):
         new_img,new_msk=spline_transform_multi(img,mask)
+        while np.all(seg_backgr==0) and np.all(new_msk==0):
+            new_img,new_msk=spline_transform_multi(img,mask)
         new_img,new_seg=blend_mask_multi(seg_backgr,new_img,back_img,new_msk)
     else:
         new_img,new_seg=blend_mask_multi(seg_backgr,img,back_img,mask)
@@ -177,8 +179,10 @@ def blend_mask_multi(seg_or, img, back_img, mask):
         img=np.dstack((img,)*3)
     
     M,N=np.where(mask>0)
-    topM,bottomM=min(M),max(M)
-    leftN,rightN=min(N),max(N)
+    if M.size==0:
+        return back_img,seg_or
+    topM,bottomM=M.min(),M.max()
+    leftN,rightN=N.min(),N.max()
     msk2=mask[topM:bottomM+1,leftN:rightN+1]
     img2=img[topM:bottomM+1,leftN:rightN+1,:]
 
@@ -263,7 +267,7 @@ def augment_image_mask_illumination_deform_random_img_multi(im0,gt0,bg0=None):
 
     if rotate:
         gt_rot_crop=rotate_image(gt0,angle,cv2.INTER_NEAREST)
-        while np.unique(gt_rot_crop).sum()==0:
+        while np.all(gt_rot_crop==0):
             print 'After rotating, the objects are missed. So we have to try a different angle.'
             angle=np.random.randint(-15,16)*2
             gt_rot_crop=rotate_image(gt0,angle,cv2.INTER_NEAREST)
