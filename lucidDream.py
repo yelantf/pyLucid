@@ -220,7 +220,11 @@ def SeamlessClone_trimap(srcIm,dstIm,imMask,offX,offY):
 
     offCenter=(offX+imMask.shape[1]/2,offY+imMask.shape[0]/2)
 
-    outputIm=cv2.seamlessClone(srcIm,dstIm,mask255,offCenter,cv2.MIXED_CLONE)
+    if np.any(bdmsk>0):
+        outputIm=cv2.seamlessClone(srcIm,dstIm,mask255,offCenter,cv2.MIXED_CLONE)
+    else:
+        outputIm=dstIm
+        #when one object have very few pixels, bdmsk will be totally zero, which will cause segmentation fault.
 
     return outputIm,new_msk
 
