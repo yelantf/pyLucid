@@ -545,6 +545,8 @@ def augment_foreground(img, seg, back_img, mask_bgr, ifshift, iftransform ):
 
     seg=new_seg2
     M,N=np.where(seg>0)
+    if M.size==0:
+        return new_img2,new_seg2,seg,Flow,Flowb
     w=np.ptp(N)+1
     h=np.ptp(M)+1
     bb1=seg
