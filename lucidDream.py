@@ -66,10 +66,8 @@ def dreamData(img, gt, bgimg, consequent_frames):
         back_img_obj_1[dilmsk==0]=im_1[dilmsk==0]
 
         transf_id=np.random.randint(3)
-        transf_id=0
         if transf_id<2:
             fogr_id=np.random.randint(3)
-            fogr_id=0
             fogr_var=np.array([[1,1],[1,0],[0,1]])
             fogr=fogr_var[fogr_id]
         if transf_id==0:
