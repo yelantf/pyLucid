@@ -146,11 +146,11 @@ def change_illumination(img,bgimg=None):
 
     newHSV=np.dstack((HSVimg[:,:,0],S,V))
     newBGR=cv2.cvtColor(newHSV,cv2.COLOR_HSV2BGR)
-    newBGR=(newBGR*255).astype('uint8')
+    newBGR=(newBGR*255+0.5).astype('uint8')
     if HSVbg is not None:
         newHSVbg=np.dstack((HSVbg[:,:,0],Sbg,Vbg))
         newbg=cv2.cvtColor(newHSVbg,cv2.COLOR_HSV2BGR)
-        newbg=(newbg*255).astype('uint8')
+        newbg=(newbg*255+0.5).astype('uint8')
         return newBGR,newbg
     else:
         return newBGR

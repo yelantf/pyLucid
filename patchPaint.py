@@ -102,7 +102,7 @@ def paint(Iorg, Mask, verbose=True, sigma=0.1):
             R[Rcountmsk]=R[Rcountmsk]/Rcount[Rcountmsk,np.newaxis]
             R=R[padwidth:m+padwidth,padwidth:n+padwidth]
             R[~M]=I[~M]
-            I=(255*R).astype('uint8')
+            I=(255*R+0.5).astype('uint8')
 
             if iter>0:
                 diff=np.sum((I.astype('float32')-Iprev)**2)/np.sum(M)
