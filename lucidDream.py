@@ -556,6 +556,8 @@ def augment_foreground(img, seg, back_img, mask_bgr, ifshift, iftransform ):
 
 def blend_mask_transf(seg, img, back_img, ifshift):
     M,N=np.where(seg>0)
+    if M.size==0:
+        return back_img,seg
     topM=M.min()
     bottomM=M.max()
     leftN=N.min()
