@@ -11,7 +11,7 @@ def paint(Iorg, Mask, verbose=True, sigma=0.1):
     Iorg=cv2.cvtColor(Iorg,cv2.COLOR_BGR2Lab)
 
     width=7
-    match_iter=8
+    match_iter=10
     
     diffthresh=1
 
