@@ -12,7 +12,7 @@ bg=paint(Iorg,np.array(Morg),False)
 cv2.imwrite('bg.jpg',bg)
 #bg=cv2.imread('bg.jpg')
 
-im_1,gt_1,bb_1,im_2,gt_2,bb_2,fb,ff=dreamData(Iorg,np.array(Morg),bgorg,True)
+im_1,gt_1,bb_1,im_2,gt_2,bb_2,fb,ff=dreamData(Iorg,np.array(Morg),bg,True)
 
 # Image 1 in this pair.
 cv2.imwrite('gen1.jpg',im_1)
