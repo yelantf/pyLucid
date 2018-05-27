@@ -42,7 +42,6 @@ bbim2.save('gen2bb.png')
 
 # Optical flow from Image 2 to Image 1. 
 # Its magnitude can be used as a guide to get mask of Image 2.
-
 flowmag=np.sqrt(np.sum(fb**2,axis=2))
 flowmag_norm=(flowmag-flowmag.min())/(flowmag.max()-flowmag.min())
 flowmagim=(flowmag_norm*255+0.5).astype('uint8')
