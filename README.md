@@ -13,6 +13,7 @@ I also used code from harveyslash's PatchMatch repository, his work can be found
 - opencv (3.2.0)
 - numpy
 - pycuda
+- six
 
 ## Usage
 
