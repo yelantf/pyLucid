@@ -2,7 +2,7 @@ import cv2
 import numpy as np 
 
 def dreamData(img, gt, bgimg, consequent_frames):
-    if isinstance(bgimg,basestring):
+    if isinstance(bgimg,str):
         back_img=cv2.imread(bgimg)
     else:
         back_img=bgimg.copy()
@@ -43,7 +43,7 @@ def dreamData(img, gt, bgimg, consequent_frames):
     if np.random.randint(2):
         new_img,new_msk=spline_transform_multi(img,mask)
         while np.all(seg_backgr==0) and np.all(new_msk==0):
-            print 'All objects are missed, so we have to retry random transform.'
+            print('All objects are missed, so we have to retry random transform.')
             new_img,new_msk=spline_transform_multi(img,mask)
         new_img,new_seg=blend_mask_multi(seg_backgr,new_img,back_img,new_msk)
     else:
@@ -223,7 +223,7 @@ def SeamlessClone_trimap(srcIm,dstIm,imMask,offX,offY):
     mask255=bdmsk>0
     mask255=(mask255*255).astype('uint8')
 
-    offCenter=(offX+imMask.shape[1]/2,offY+imMask.shape[0]/2)
+    offCenter=(int(offX+imMask.shape[1]/2),int(offY+imMask.shape[0]/2))
 
     if np.any(bdmsk>0):
         outputIm=cv2.seamlessClone(srcIm,dstIm,mask255,offCenter,cv2.MIXED_CLONE)
@@ -269,7 +269,7 @@ def augment_image_mask_illumination_deform_random_img_multi(im0,gt0,bg0=None):
     if rotate:
         gt_rot_crop=rotate_image(gt0,angle,cv2.INTER_NEAREST)
         while np.all(gt_rot_crop==0):
-            print 'After rotating, the objects are missed. So we have to try a different angle.'
+            print('After rotating, the objects are missed. So we have to try a different angle.')
             angle=np.random.randint(-15,16)*2
             gt_rot_crop=rotate_image(gt0,angle,cv2.INTER_NEAREST)
         im1_rot_crop=rotate_image(im0,angle,cv2.INTER_CUBIC)
@@ -385,9 +385,9 @@ def crop_around_center(image, width, height):
     if(height > image_size[1]):
         height = image_size[1]
 
-    x1=image_center[0]-width/2
+    x1=int(image_center[0]-width/2)
     x2=x1+width
-    y1=image_center[1]-height/2
+    y1=int(image_center[1]-height/2)
     y2=y1+height
 
     return image[y1:y2, x1:x2]
@@ -603,7 +603,7 @@ def thin_plate_transform(x,y,offw,offh,imshape,shift_l=-0.05,shift_r=0.05,num_po
     fixedPoints[:,:,1]=movingPoints[:,:,1]+offh*(np.random.rand(num_points)*(shift_r-shift_l)+shift_l)
 
     tps=cv2.createThinPlateSplineShapeTransformer()
-    good_matches=[cv2.DMatch(i,i,0) for i in xrange(num_points)]
+    good_matches=[cv2.DMatch(i,i,0) for i in range(num_points)]
     tps.estimateTransformation(movingPoints,fixedPoints,good_matches)
 
     imh,imw=imshape
