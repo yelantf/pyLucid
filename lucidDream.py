@@ -1,8 +1,10 @@
+from __future__ import print_function, division
+from six import string_types
 import cv2
 import numpy as np 
 
 def dreamData(img, gt, bgimg, consequent_frames):
-    if isinstance(bgimg,str):
+    if isinstance(bgimg, string_types):
         back_img=cv2.imread(bgimg)
     else:
         back_img=bgimg.copy()
